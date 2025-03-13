@@ -11,7 +11,7 @@ pipeline {
          }
          stage("Checkout from SCM") {
              steps {
-                     git branch: 'main', credentialsId: 'github', url: 'https://github.com/devops-easy/gitops-reddit-clone.git'
+                     git branch: 'main', credentialsId: 'github', url: 'https://github.com/arunkumardhanabal/gitops-reddit-clone.git'
              }
          }
          stage("Update the Deployment Tags") {
@@ -26,13 +26,13 @@ pipeline {
          stage("Push the changed deployment file to GitHub") {
             steps {
                 sh """
-                    git config --global user.name "devopseasy"
-                    git config --global user.email "devopseasy@gmail.com"
+                    git config --global user.name "arunkumardhanabal"
+                    git config --global user.email "arunkumar.dhanabal1988@gmail.com"
                     git add deployment.yaml
                     git commit -m "Updated Deployment Manifest"
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                    sh "git push https://github.com/devops-easy/gitops-reddit-clone main"
+                    sh "git push https://github.com/arunkumardhanabal/gitops-reddit-clone main"
                 }
             }
          }
